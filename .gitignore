@@ -1,0 +1,22 @@
+# IDE configuration
+.idea/
+**/.idea/
+
+# Windows download metadata
+*:Zone.Identifier
+
+# Local skill installation state
+.skill-lock.json
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS metadata
+.DS_Store
+Thumbs.db
