@@ -1,5 +1,5 @@
 ---
-name: adsense-audit
+name: nova-adsense-audit
 description: 站在 Google AdSense 审核员视角体检 Laravel 网站。检查 thin content / low value、法务五件套、SEO、favicon、日志时区、广告位合规等会导致拒审的问题。上线提审前 / 被拒后定位用。
 ---
 
@@ -8,7 +8,7 @@ description: 站在 Google AdSense 审核员视角体检 Laravel 网站。检查
 > **输出语言：本 skill 全程用中文回复**（叙述、报告、结论一律中文），代码 / 命令 / 文件路径保持原样。
 
 站在 Google AdSense 审核员视角，对 Laravel 建站项目做提审前体检 / 被拒后定位。
-**不重复 `laravel-themes`**：广告位实现、主题互斥、favicon 渲染、SEO sections 由它负责，本 skill 只做审核员视角的内容/合规判定，相关项一律引用 `[[laravel-themes]]`。
+**不重复开发规则**：广告位、favicon、SEO 等通用实现由 `[[nova-laravel-starter]]` 负责，多主题互斥与逐主题验证由 `[[nova-laravel-themes]]` 负责；本 skill 只做审核员视角的内容/合规判定。
 
 触发词：adsense、审核、提审、被拒、thin content、low value、法务、合规、policy
 
@@ -18,10 +18,10 @@ description: 站在 Google AdSense 审核员视角体检 Laravel 网站。检查
 
 | 命令 | 说明 |
 |------|------|
-| `/adsense-audit` | 全量体检，逐项出报告（默认） |
-| `/adsense-audit fix` | 体检 + 致命缺项直接补（仅限法务页、favicon、robots/sitemap 这类无歧义缺失） |
-| `/adsense-audit content` | 只查内容质量（thin / low value / 原创度） |
-| `/adsense-audit legal` | 只查法务五件套 |
+| `/nova-adsense-audit` | 全量体检，逐项出报告（默认） |
+| `/nova-adsense-audit fix` | 体检 + 致命缺项直接补（仅限法务页、favicon、robots/sitemap 这类无歧义缺失） |
+| `/nova-adsense-audit content` | 只查内容质量（thin / low value / 原创度） |
+| `/nova-adsense-audit legal` | 只查法务五件套 |
 
 **产出形式**：逐项 `✅ 通过 / ⚠️ 警告 / ❌ 拒审风险`，每条带文件位置 + 修复建议。
 默认只报告不改代码；`fix` 模式下仅对**无歧义的致命缺项**动手（法务页缺失、favicon 缺失、robots/sitemap 缺失），其余仍只报告——内容质量这类需要人判断的绝不自动生成。
@@ -47,7 +47,7 @@ description: 站在 Google AdSense 审核员视角体检 Laravel 网站。检查
 ```
 - [ ] 实质内容页 ≥ 15~20
 - [ ] 抽查详情页正文字数达标、内容互不雷同
-- [ ] 无"有路由无数据"的空壳页（`migrate:fresh --seed` 后逐路由验证，见 [[laravel-themes]] 验证清单 4.6）
+- [ ] 无"有路由无数据"的空壳页（在安全测试数据库完成数据初始化后逐路由验证，见 [[nova-laravel-starter]]）
 
 ### 2.2 Low value content（低价值）
 
@@ -65,7 +65,7 @@ description: 站在 Google AdSense 审核员视角体检 Laravel 网站。检查
 - [ ] 主导航能到达所有主要内容区
 - [ ] 法务五件套齐全且页脚可达（见第三节）
 - [ ] 无大量 404 / 占位页 / "Coming soon"
-- [ ] favicon 存在（手写 SVG 即可，实现见 [[laravel-themes]]）
+- [ ] favicon 存在（手写 SVG 即可，实现见 [[nova-laravel-starter]]）
 
 ---
 
@@ -92,7 +92,7 @@ grep -rniE "privacy|terms|about|contact" resources/views/themes/*/
 ```
 - [ ] 五个页面路由均返回 200
 - [ ] 内容非占位/非空（每页 ≥ 一屏实质文字）
-- [ ] **每个已注册主题的页脚都有完整法务链接**（多主题易漏，逐主题查，见 [[laravel-themes]]）
+- [ ] **每个已注册主题的页脚都有完整法务链接**（多主题易漏，逐主题查，见 [[nova-laravel-themes]]；法务要求见 [[nova-laravel-starter]]）
 - [ ] 隐私政策含 Google 第三方广告 Cookie 条款 + 退出链接
 
 > `fix` 模式：法务页完全缺失时，按上表生成合规模板（中英按站点语言），内容需用户后续核对真实信息——生成后明确提示"占位信息待替换"。
@@ -101,7 +101,7 @@ grep -rniE "privacy|terms|about|contact" resources/views/themes/*/
 
 ## 四、SEO 与可索引性
 
-`laravel-themes` 验证清单 4.4 已覆盖 title/meta/canonical/JSON-LD/noindex 的**实现**，本节只补**审核员/SEO 角度的增量检查**，不重复实现细节。
+`nova-laravel-starter` 已覆盖 title/meta/canonical/JSON-LD/noindex 的**实现**，本节只补**审核员/SEO 角度的增量检查**，不重复实现细节。
 
 ### 4.1 可索引性（提审硬底线）
 
@@ -119,7 +119,7 @@ grep -rn "meta name=\"description\"" resources/views/themes/*/ | sort | uniq -c
 
 ### 4.2 结构化数据 / Schema
 
-JSON-LD 的渲染实现归 `[[laravel-themes]]`，本节查**类型完整性与正确性**：
+JSON-LD 的渲染实现归 `[[nova-laravel-starter]]`，本节查**类型完整性与正确性**：
 
 - [ ] 文章/详情页有 `Article`（或 `BlogPosting`/`NewsArticle`）schema，含 headline/datePublished/author
 - [ ] 列表/层级页有 `BreadcrumbList`（与页面真实面包屑一致）
@@ -187,13 +187,13 @@ grep -rnoE '<img[^>]*>' resources/views/themes/*/ | grep -viE 'alt=' | head
 
 ## 五、广告代码与广告位（提审/投放阶段）
 
-广告位**位置规范与实现**归 `[[laravel-themes]]`（banner1 导航下方、banner2 移动端第二屏、无广告不渲染 DOM）。本节只查 **AdSense 政策相关**的广告合规：
+广告位**位置规范与实现**归 `[[nova-laravel-starter]]`（banner1 导航下方、banner2 移动端第二屏、无广告不渲染 DOM）。本节只查 **AdSense 政策相关**的广告合规：
 
 - [ ] 提审阶段广告代码可挂（ads.txt + 验证代码），但**审核中不强求广告填充**
 - [ ] `ads.txt` 放在站点根 `public/ads.txt`，含正确 publisher ID
 - [ ] 广告不与导航/按钮贴太近造成误点（政策禁止诱导点击）
 - [ ] 单页广告不超内容（审核员看"内容为主、广告为辅"）
-- [ ] 移动端 banner2 不在首屏堆叠（见 [[laravel-themes]] 4.3）
+- [ ] 移动端 banner2 不在首屏堆叠（见 [[nova-laravel-starter]]）
 - [ ] 无"请点击广告"等诱导文案
 
 ```bash
@@ -207,7 +207,7 @@ ls public/ads.txt 2>/dev/null && cat public/ads.txt
 后台用 `nbutl/nova-admin`，广告代码后台加载。审核相关基础项：
 
 - [ ] 广告代码由后台配置项注入（global_head / banner slots），非硬编码
-- [ ] 后台仅激活一个主题（主题互斥，见 [[laravel-themes]]）
+- [ ] 后台仅激活一个主题（主题互斥，见 [[nova-laravel-themes]]）
 
 ### 日志规范（按天 + 时区）
 - [ ] `config/logging.php` 默认 channel 为 `daily`（按天存储）
@@ -249,10 +249,10 @@ grep -n "channel.*daily\|'daily'" config/logging.php
 ## 八、使用方式
 
 ```
-/adsense-audit          # 全量体检，出报告
-/adsense-audit fix      # 体检并自动补法务页/favicon/robots 等无歧义缺项
-/adsense-audit content  # 只查内容质量
-/adsense-audit legal    # 只查法务五件套
+/nova-adsense-audit          # 全量体检，出报告
+/nova-adsense-audit fix      # 体检并自动补法务页/favicon/robots 等无歧义缺项
+/nova-adsense-audit content  # 只查内容质量
+/nova-adsense-audit legal    # 只查法务五件套
 ```
 
 体检完成后给出明确结论：**可提审 / 暂不建议提审 + 阻塞项清单**。
