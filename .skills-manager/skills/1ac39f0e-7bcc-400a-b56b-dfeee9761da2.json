@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "1ac39f0e-7bcc-400a-b56b-dfeee9761da2",
+  "path": "skills/ilang-adsense-auditor",
+  "path_key": "skills/ilang-adsense-auditor",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

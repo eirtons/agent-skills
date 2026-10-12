@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "25f533ca-6978-4622-9c7a-8ae55fd5dc12",
+  "path": "skills/nova-laravel-themes",
+  "path_key": "skills/nova-laravel-themes",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

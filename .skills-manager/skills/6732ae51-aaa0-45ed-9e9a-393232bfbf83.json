@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "6732ae51-aaa0-45ed-9e9a-393232bfbf83",
+  "path": "skills/code-review-excellence",
+  "path_key": "skills/code-review-excellence",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

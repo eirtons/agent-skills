@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "6e3987ee-d1c0-40a2-b802-efb868c3d058",
+  "path": "skills/nova-laravel-starter",
+  "path_key": "skills/nova-laravel-starter",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}

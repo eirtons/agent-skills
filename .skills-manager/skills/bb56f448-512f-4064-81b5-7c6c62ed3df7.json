@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "skill_id": "bb56f448-512f-4064-81b5-7c6c62ed3df7",
+  "path": "skills/nova-adsense-audit",
+  "path_key": "skills/nova-adsense-audit",
+  "enabled": true,
+  "tags": [],
+  "source": {
+    "type": "import",
+    "ref": null,
+    "subpath": null,
+    "branch": null
+  }
+}
