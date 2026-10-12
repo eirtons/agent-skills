@@ -195,6 +195,7 @@ public/themes/{slug}/         # 主题专属静态资源
 - 后台已有主题管理时，确保可查看和编辑 `is_new`，并让 `is_new = true` 的主题优先展示；不要把后台排序逻辑当作发布标记的数据来源。
 - Seeder 禁用 Model events 时，主题变更后必须显式清除激活主题缓存。
 - 删除主题前检查其是否处于激活状态，并提供可用回退主题；不得留下数据库记录、视图目录或构建入口孤儿。
+- 项目登记了主题建站预设（`config/nova-admin.php` 的 `site_presets.theme`）时，发布新主题后运行 `php artisan nova-admin:export-site-presets` 并提交 `site-presets.json`，否则 doctor 失败、webdeploy 建站下拉里选不到新主题。
 
 ## 六、推荐 SOP
 

@@ -361,6 +361,7 @@ npm audit --omit=dev
 - 有 scheduler 时才配置 cron；不要为空项目增加 Supervisor 或 scheduler。
 - PHP 代码部署后按环境 reload PHP-FPM，避免 OPcache 继续运行旧字节码。
 - Composer 使用 `--no-scripts` 时检查是否需要手工执行 Filament assets 命令。
+- 首次 seed 随机分配领域 / 主题等的项目，接入 nova-admin 建站预设：实现 `SitePresetProvider` 并在 `config/nova-admin.php` 的 `site_presets` 登记，seeder 写 `site_preset('key') ?? 原随机`，运行 `php artisan nova-admin:export-site-presets` 并提交 `site-presets.json`（doctor 守一致）。webdeploy 的 create.sh 需在 `cp .env.example .env` 后把 `WEBDEPLOY_PRESET_*` 写成 `NOVA_PRESET_*`。
 
 ## 十二、与 nova-laravel-themes 的关系
 
