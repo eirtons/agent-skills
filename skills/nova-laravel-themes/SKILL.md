@@ -48,8 +48,8 @@ description: Laravel 多主题系统开发。Use ONLY when 用户明确要求多
 
 主题记录至少需要：
 
-- `name`
-- 唯一 `slug`
+- `name`：中文主题名（如「关卡选择」），只用于后台与 webdeploy 建站下拉，前台不展示
+- 唯一 `slug`：英文 kebab-case，用作资源目录、body class 与建站预设值，发布后不得修改
 - `is_active`
 - `is_new`
 - 时间戳

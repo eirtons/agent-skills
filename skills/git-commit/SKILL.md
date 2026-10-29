@@ -20,6 +20,7 @@ description: Git commit with auto-generated message. Use when the user says "提
 - If multiple files changed for the same purpose, summarize the purpose — don't list files
 - Body (optional): only when the subject alone is ambiguous. Max 2 lines, focus on WHY
 - No scope prefixes (feat/fix/chore) unless the repo already uses them
+- **禁止添加 Claude 署名**（`Co-Authored-By: Claude ...` 等 trailer），即使最近提交里有也不要模仿
 - Prefer a single line commit. Multi-line only when changes span unrelated concerns that can't be summarized in one phrase
 
 **Bad:** `更新用户认证模块以处理令牌刷新的边界情况并增加错误日志`
